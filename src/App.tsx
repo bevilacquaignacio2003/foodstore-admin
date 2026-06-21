@@ -4,6 +4,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { ProductosPage } from "./features/productos/ProductosPage";
 import { CategoriasPage } from "./features/categorias/CategoriasPage";
 import { PedidosPage } from "./features/pedidos/PedidosPage";
+import { UsuariosPage } from "./features/usuarios/UsuariosPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Layout } from "./components/Layout";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/productos" element={<ProductosPage />} />
           <Route path="/categorias" element={<CategoriasPage />} />
           <Route path="/pedidos" element={<PedidosPage />} />
+          <Route path="/usuarios" element={<UsuariosPage />} />
         </Route>
 
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
