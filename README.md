@@ -1,10 +1,10 @@
-# FoodStore - Admin App
+﻿FoodStore - Admin App
 
 Frontend de administración para el sistema FoodStore. Es la app interna que realicé para gestionar categorías, productos, pedidos, usuarios y ver las estadísticas del negocio.
 
 ## Link al video
 
-
+link: 
 
 ## Tecnologías
 
@@ -17,6 +17,7 @@ Frontend de administración para el sistema FoodStore. Es la app interna que rea
 
 ## Estructura del Proyecto (Feature-based)
 
+```
 foodstore-admin/
 ├── src/
 │   ├── api/                    # Cliente HTTP (Axios)
@@ -72,6 +73,7 @@ foodstore-admin/
 ├── tailwind.config.js
 ├── tsconfig.json
 └── vite.config.ts
+```
 
 Cada feature contiene su página, sus componentes específicos y su `service` con las llamadas a la API.
 
@@ -93,7 +95,9 @@ Disponible en `http://localhost:5173`.
 
 Crear un `.env` en la raíz:
 
+```
 VITE_API_URL=http://localhost:8000
+```
 
 ## Rutas
 
@@ -116,8 +120,10 @@ Login restringido a roles `ADMIN`, `STOCK` y `PEDIDOS`. JWT vía cookie HttpOnly
 
 ## Usuario de prueba
 
+```
 Email: admin@foodstore.com
 Password: Admin1234!
+```
 
 ## Scripts
 
