@@ -4,6 +4,7 @@ import { Pencil, Trash2, Plus, ChevronRight, ImageOff } from "lucide-react";
 import { categoriaService } from "./categoriaService";
 import { CategoriaForm } from "./CategoriaForm";
 import { Modal } from "../../components/Modal";
+import { notifyError, notifySuccess } from "../../store/toastStore";
 import type { Categoria } from "../../types";
 
 export function CategoriasPage() {
@@ -27,6 +28,10 @@ export function CategoriasPage() {
       queryClient.invalidateQueries({ queryKey: ["categorias"] });
       queryClient.invalidateQueries({ queryKey: ["categorias-flat"] });
       setModalOpen(false);
+      notifySuccess("Categoría creada correctamente");
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al crear la categoría");
     },
   });
 
@@ -38,6 +43,10 @@ export function CategoriasPage() {
       queryClient.invalidateQueries({ queryKey: ["categorias-flat"] });
       setModalOpen(false);
       setEditingCategoria(null);
+      notifySuccess("Categoría actualizada correctamente");
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al actualizar la categoría");
     },
   });
 
@@ -46,6 +55,10 @@ export function CategoriasPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categorias"] });
       queryClient.invalidateQueries({ queryKey: ["categorias-flat"] });
+      notifySuccess("Categoría eliminada");
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al eliminar la categoría");
     },
   });
 

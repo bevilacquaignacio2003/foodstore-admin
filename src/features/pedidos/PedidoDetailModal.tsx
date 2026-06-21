@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { X } from "lucide-react";
 import { pedidoService } from "./pedidoService";
 import { EstadoBadge } from "../../components/EstadoBadge";
+import { notifyError, notifySuccess } from "../../store/toastStore";
 import type { EstadoPedidoCodigo } from "../../types";
 
 const TRANSICIONES: Record<EstadoPedidoCodigo, EstadoPedidoCodigo[]> = {
@@ -43,11 +44,15 @@ export function PedidoDetailModal({ pedidoId, onClose }: PedidoDetailModalProps)
         nuevo_estado,
         motivo: nuevo_estado === "CANCELADO" ? motivo : null,
       }),
-    onSuccess: () => {
+    onSuccess: (_, nuevo_estado) => {
       queryClient.invalidateQueries({ queryKey: ["pedido", pedidoId] });
       queryClient.invalidateQueries({ queryKey: ["pedidos"] });
       setShowMotivoFor(null);
       setMotivo("");
+      notifySuccess(`Pedido actualizado a ${ETIQUETAS[nuevo_estado] || nuevo_estado}`);
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al cambiar el estado del pedido");
     },
   });
 
@@ -61,7 +66,7 @@ export function PedidoDetailModal({ pedidoId, onClose }: PedidoDetailModalProps)
 
   const handleConfirmarCancelacion = () => {
     if (!motivo.trim()) {
-      alert("El motivo es obligatorio para cancelar");
+      notifyError("El motivo es obligatorio para cancelar");
       return;
     }
     avanzarEstado.mutate("CANCELADO");

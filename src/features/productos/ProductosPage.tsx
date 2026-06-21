@@ -4,6 +4,7 @@ import { Pencil, Trash2, Plus, ImageOff } from "lucide-react";
 import { productoService } from "./productoService";
 import { ProductoForm } from "./ProductoForm";
 import { Modal } from "../../components/Modal";
+import { notifyError, notifySuccess } from "../../store/toastStore";
 import type { Producto } from "../../types";
 
 export function ProductosPage() {
@@ -22,6 +23,10 @@ export function ProductosPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["productos"] });
       setModalOpen(false);
+      notifySuccess("Producto creado correctamente");
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al crear el producto");
     },
   });
 
@@ -32,6 +37,10 @@ export function ProductosPage() {
       queryClient.invalidateQueries({ queryKey: ["productos"] });
       setModalOpen(false);
       setEditingProducto(null);
+      notifySuccess("Producto actualizado correctamente");
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al actualizar el producto");
     },
   });
 
@@ -41,12 +50,19 @@ export function ProductosPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["productos"] });
     },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al cambiar disponibilidad");
+    },
   });
 
   const deleteProducto = useMutation({
     mutationFn: (id: number) => productoService.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["productos"] });
+      notifySuccess("Producto eliminado");
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al eliminar el producto");
     },
   });
 

@@ -7,10 +7,12 @@ import { PedidosPage } from "./features/pedidos/PedidosPage";
 import { UsuariosPage } from "./features/usuarios/UsuariosPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Layout } from "./components/Layout";
+import { ToastContainer } from "./components/ToastContainer";
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 

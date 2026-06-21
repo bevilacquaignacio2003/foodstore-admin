@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { format } from "date-fns";
 import { usuarioService } from "./usuarioService";
+import { notifyError, notifySuccess } from "../../store/toastStore";
 import type { RolCodigo } from "../../types";
 
 const ROLES_DISPONIBLES: RolCodigo[] = ["ADMIN", "STOCK", "PEDIDOS", "CLIENT"];
@@ -27,16 +28,24 @@ export function UsuariosPage() {
   const asignarRol = useMutation({
     mutationFn: ({ id, rol }: { id: number; rol: RolCodigo }) =>
       usuarioService.asignarRol(id, rol),
-    onSuccess: () => {
+    onSuccess: (_, { rol }) => {
       queryClient.invalidateQueries({ queryKey: ["usuarios"] });
+      notifySuccess(`Rol ${rol} asignado`);
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al asignar el rol");
     },
   });
 
   const removerRol = useMutation({
     mutationFn: ({ id, rol }: { id: number; rol: RolCodigo }) =>
       usuarioService.removerRol(id, rol),
-    onSuccess: () => {
+    onSuccess: (_, { rol }) => {
       queryClient.invalidateQueries({ queryKey: ["usuarios"] });
+      notifySuccess(`Rol ${rol} removido`);
+    },
+    onError: (err: any) => {
+      notifyError(err.response?.data?.detail || "Error al remover el rol");
     },
   });
 
