@@ -18,113 +18,59 @@ Frontend de administración para el sistema FoodStore. Es la app interna que rea
 ## Estructura del Proyecto (Feature-based)
 
 foodstore-admin/
-
 ├── src/
-
 │   ├── api/                    # Cliente HTTP (Axios)
-
 │   │   └── client.ts
-
 │   ├── components/             # Componentes compartidos
-
 │   │   ├── Sidebar.tsx
-
 │   │   ├── Header.tsx
-
 │   │   ├── Layout.tsx
-
 │   │   ├── Modal.tsx
-
 │   │   ├── ProtectedRoute.tsx
-
 │   │   ├── EstadoBadge.tsx
-
 │   │   ├── ConnectionBadge.tsx
-
 │   │   ├── StatCard.tsx
-
 │   │   └── ImageUploader.tsx
-
 │   ├── features/               # Módulos por dominio
-
 │   │   ├── auth/                # Autenticación
-
 │   │   │   ├── LoginPage.tsx
-
 │   │   │   └── authService.ts
-
 │   │   ├── categorias/          # Gestión de categorías
-
 │   │   │   ├── CategoriasPage.tsx
-
 │   │   │   ├── CategoriaForm.tsx
-
 │   │   │   └── categoriaService.ts
-
 │   │   ├── productos/           # Gestión de productos
-
 │   │   │   ├── ProductosPage.tsx
-
 │   │   │   ├── ProductoForm.tsx
-
 │   │   │   └── productoService.ts
-
 │   │   ├── pedidos/              # Gestión de pedidos
-
 │   │   │   ├── PedidosPage.tsx
-
 │   │   │   ├── PedidoDetailModal.tsx
-
 │   │   │   └── pedidoService.ts
-
 │   │   ├── usuarios/             # Gestión de usuarios y roles
-
 │   │   │   ├── UsuariosPage.tsx
-
 │   │   │   └── usuarioService.ts
-
 │   │   ├── estadisticas/         # KPIs y gráficos
-
 │   │   │   └── estadisticaService.ts
-
 │   │   └── uploads/              # Subida de imágenes (Cloudinary)
-
 │   │       └── uploadService.ts
-
 │   ├── hooks/                    # Hooks personalizados
-
 │   │   └── useAdminOrdersFeed.ts # Conexión WebSocket con reconexión
-
 │   ├── pages/                     # Páginas de nivel superior
-
 │   │   └── DashboardPage.tsx
-
 │   ├── store/                     # Estado global (Zustand)
-
 │   │   ├── authStore.ts
-
 │   │   └── wsStore.ts
-
 │   ├── types/                     # Tipos TypeScript compartidos
-
 │   │   └── index.ts
-
 │   ├── App.tsx                    # Router principal
-
 │   ├── main.tsx                   # Punto de entrada
-
 │   └── index.css                  # Estilos globales (Tailwind)
-
 ├── .env                           # Variables de entorno
-
 ├── index.html
-
 ├── package.json
-
 ├── tailwind.config.js
-
 ├── tsconfig.json
-
 └── vite.config.ts
 
 Cada feature contiene su página, sus componentes específicos y su `service` con las llamadas a la API.
