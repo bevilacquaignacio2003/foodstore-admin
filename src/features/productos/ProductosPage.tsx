@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, ImageOff } from "lucide-react";
 import { productoService } from "./productoService";
 import { ProductoForm } from "./ProductoForm";
 import { Modal } from "../../components/Modal";
@@ -99,6 +99,7 @@ export function ProductosPage() {
         <table className="w-full text-sm">
           <thead className="bg-slate-50 text-slate-500 text-left">
             <tr>
+              <th className="px-4 py-3">Imagen</th>
               <th className="px-4 py-3">Nombre</th>
               <th className="px-4 py-3">Precio</th>
               <th className="px-4 py-3">Stock</th>
@@ -109,7 +110,7 @@ export function ProductosPage() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={5} className="px-4 py-6 text-center text-slate-400">
+                <td colSpan={6} className="px-4 py-6 text-center text-slate-400">
                   Cargando...
                 </td>
               </tr>
@@ -117,6 +118,19 @@ export function ProductosPage() {
 
             {data?.items.map((producto) => (
               <tr key={producto.id} className="border-t border-slate-100">
+                <td className="px-4 py-3">
+                  {producto.imagenes_url && producto.imagenes_url[0] ? (
+                    <img
+                      src={producto.imagenes_url[0]}
+                      alt={producto.nombre}
+                      className="w-10 h-10 rounded-lg object-cover"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-300">
+                      <ImageOff size={16} />
+                    </div>
+                  )}
+                </td>
                 <td className="px-4 py-3 font-medium text-slate-700">
                   {producto.nombre}
                 </td>
@@ -162,7 +176,7 @@ export function ProductosPage() {
 
             {!isLoading && data?.items.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-6 text-center text-slate-400">
+                <td colSpan={6} className="px-4 py-6 text-center text-slate-400">
                   No hay productos todavía
                 </td>
               </tr>

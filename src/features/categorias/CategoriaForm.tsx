@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import type { Categoria } from "../../types";
+import { ImageUploader } from "../../components/ImageUploader";
 
 interface CategoriaFormData {
   nombre: string;
   descripcion: string;
   parent_id: number | null;
+  imagen_url: string | null;
 }
 
 interface CategoriaFormProps {
@@ -26,6 +28,7 @@ export function CategoriaForm({
     nombre: "",
     descripcion: "",
     parent_id: null,
+    imagen_url: null,
   });
 
   useEffect(() => {
@@ -34,6 +37,7 @@ export function CategoriaForm({
         nombre: categoria.nombre,
         descripcion: categoria.descripcion || "",
         parent_id: categoria.parent_id || null,
+        imagen_url: categoria.imagen_url || null,
       });
     }
   }, [categoria]);
@@ -49,6 +53,13 @@ export function CategoriaForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <ImageUploader
+        imageUrl={form.imagen_url}
+        folder="foodstore/categorias"
+        onUploaded={(url) => setForm({ ...form, imagen_url: url })}
+        onRemoved={() => setForm({ ...form, imagen_url: null })}
+      />
+
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
           Nombre

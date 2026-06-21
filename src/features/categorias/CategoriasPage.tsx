@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Pencil, Trash2, Plus, ChevronRight } from "lucide-react";
+import { Pencil, Trash2, Plus, ChevronRight, ImageOff } from "lucide-react";
 import { categoriaService } from "./categoriaService";
 import { CategoriaForm } from "./CategoriaForm";
 import { Modal } from "../../components/Modal";
@@ -79,8 +79,19 @@ export function CategoriasPage() {
         className="flex items-center justify-between px-4 py-3 border-t border-slate-100 hover:bg-slate-50"
         style={{ paddingLeft: `${16 + nivel * 24}px` }}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {nivel > 0 && <ChevronRight size={14} className="text-slate-400" />}
+          {categoria.imagen_url ? (
+            <img
+              src={categoria.imagen_url}
+              alt={categoria.nombre}
+              className="w-8 h-8 rounded-lg object-cover"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-300">
+              <ImageOff size={14} />
+            </div>
+          )}
           <span className="font-medium text-slate-700 text-sm">
             {categoria.nombre}
           </span>

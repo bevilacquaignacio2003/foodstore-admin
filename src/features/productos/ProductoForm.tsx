@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Producto } from "../../types";
+import { ImageUploader } from "../../components/ImageUploader";
 
 interface ProductoFormData {
   nombre: string;
@@ -7,6 +8,7 @@ interface ProductoFormData {
   precio_base: number;
   stock_cantidad: number;
   disponible: boolean;
+  imagenes_url: string[];
 }
 
 interface ProductoFormProps {
@@ -23,6 +25,7 @@ export function ProductoForm({ producto, onSubmit, onCancel, loading }: Producto
     precio_base: 0,
     stock_cantidad: 0,
     disponible: true,
+    imagenes_url: [],
   });
 
   useEffect(() => {
@@ -33,6 +36,7 @@ export function ProductoForm({ producto, onSubmit, onCancel, loading }: Producto
         precio_base: producto.precio_base,
         stock_cantidad: producto.stock_cantidad,
         disponible: producto.disponible,
+        imagenes_url: producto.imagenes_url || [],
       });
     }
   }, [producto]);
@@ -42,8 +46,17 @@ export function ProductoForm({ producto, onSubmit, onCancel, loading }: Producto
     onSubmit(form);
   };
 
+  const imagenActual = form.imagenes_url[0] || null;
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <ImageUploader
+        imageUrl={imagenActual}
+        folder="foodstore/productos"
+        onUploaded={(url) => setForm({ ...form, imagenes_url: [url] })}
+        onRemoved={() => setForm({ ...form, imagenes_url: [] })}
+      />
+
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
           Nombre
