@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Package, FolderTree, ClipboardList, Users } from "lucide-react";
+import { LayoutDashboard, Package, FolderTree, ClipboardList, Users, Wheat } from "lucide-react";
 
 const links = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/productos", label: "Productos", icon: Package },
   { to: "/categorias", label: "Categorías", icon: FolderTree },
+  { to: "/ingredientes", label: "Ingredientes", icon: Wheat },
   { to: "/pedidos", label: "Pedidos", icon: ClipboardList },
   { to: "/usuarios", label: "Usuarios", icon: Users },
 ];

@@ -3,6 +3,7 @@ import { LoginPage } from "./features/auth/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { ProductosPage } from "./features/productos/ProductosPage";
 import { CategoriasPage } from "./features/categorias/CategoriasPage";
+import { IngredientesPage } from "./features/ingredientes/IngredientesPage";
 import { PedidosPage } from "./features/pedidos/PedidosPage";
 import { UsuariosPage } from "./features/usuarios/UsuariosPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/productos" element={<ProductosPage />} />
           <Route path="/categorias" element={<CategoriasPage />} />
+          <Route path="/ingredientes" element={<IngredientesPage />} />
           <Route path="/pedidos" element={<PedidosPage />} />
           <Route path="/usuarios" element={<UsuariosPage />} />
         </Route>
