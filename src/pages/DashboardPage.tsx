@@ -15,7 +15,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { DollarSign, ShoppingBag, TrendingUp, Receipt } from "lucide-react";
-import { format, subDays } from "date-fns";
+import { format, subDays, addDays } from "date-fns";
 import { estadisticaService } from "../features/estadisticas/estadisticaService";
 import { StatCard } from "../components/StatCard";
 
@@ -28,8 +28,8 @@ const COLORES_ESTADO: Record<string, string> = {
 };
 
 export function DashboardPage() {
-  const hoy = format(new Date(), "yyyy-MM-dd");
-  const hace30dias = format(subDays(new Date(), 30), "yyyy-MM-dd");
+  const mañana = format(addDays(new Date(), 1), "yyyy-MM-dd");
+  const hace30dias = format(subDays(new Date(), 31), "yyyy-MM-dd");
 
   const { data: resumen } = useQuery({
     queryKey: ["estadisticas-resumen"],
@@ -39,7 +39,7 @@ export function DashboardPage() {
 
   const { data: ventas } = useQuery({
     queryKey: ["estadisticas-ventas"],
-    queryFn: () => estadisticaService.getVentas(hace30dias, hoy, "day"),
+    queryFn: () => estadisticaService.getVentas(hace30dias, mañana, "day"),
   });
 
   const { data: productosTop } = useQuery({
@@ -54,7 +54,7 @@ export function DashboardPage() {
 
   const { data: ingresos } = useQuery({
     queryKey: ["estadisticas-ingresos"],
-    queryFn: () => estadisticaService.getIngresos(hace30dias, hoy),
+    queryFn: () => estadisticaService.getIngresos(hace30dias, mañana),
   });
 
   return (
