@@ -31,7 +31,9 @@ foodstore-admin/
 │   │   ├── EstadoBadge.tsx
 │   │   ├── ConnectionBadge.tsx
 │   │   ├── StatCard.tsx
-│   │   └── ImageUploader.tsx
+│   │   ├── ImageUploader.tsx
+│   │   ├── Toast.tsx
+│   │   └── ToastContainer.tsx
 │   ├── features/               # Módulos por dominio
 │   │   ├── auth/                # Autenticación
 │   │   │   ├── LoginPage.tsx
@@ -40,6 +42,10 @@ foodstore-admin/
 │   │   │   ├── CategoriasPage.tsx
 │   │   │   ├── CategoriaForm.tsx
 │   │   │   └── categoriaService.ts
+│   │   ├── ingredientes/        # Gestión de ingredientes
+│   │   │   ├── IngredientesPage.tsx
+│   │   │   ├── IngredienteForm.tsx
+│   │   │   └── ingredienteService.ts
 │   │   ├── productos/           # Gestión de productos
 │   │   │   ├── ProductosPage.tsx
 │   │   │   ├── ProductoForm.tsx
@@ -61,7 +67,8 @@ foodstore-admin/
 │   │   └── DashboardPage.tsx
 │   ├── store/                     # Estado global (Zustand)
 │   │   ├── authStore.ts
-│   │   └── wsStore.ts
+│   │   ├── wsStore.ts
+│   │   └── toastStore.ts
 │   ├── types/                     # Tipos TypeScript compartidos
 │   │   └── index.ts
 │   ├── App.tsx                    # Router principal
@@ -73,6 +80,7 @@ foodstore-admin/
 ├── tailwind.config.js
 ├── tsconfig.json
 └── vite.config.ts
+
 ```
 
 Cada feature contiene su página, sus componentes específicos y su `service` con las llamadas a la API.
